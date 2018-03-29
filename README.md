@@ -2,8 +2,29 @@
 This MATLAB program can devide sample images into servel classes according `groundtruth` message in XML file
 
 ---
+## PREPARED
+VOC2007 dataset is need:
+> VOC2007
+   
+> > Annotations
+> > > name.xml
+
+> > JPEGImages
+> > > name.jpg
+
+> > labels
+> > > name.txt
+
+`name.txt` can be genarated by code in [darnet/scripts/voc_label.py](https://github.com/pjreddie/darknet) contains:
+
+```
+class_ind(start with 0) xmin xmax ymin ymax
+```
+
+
+---
 ## START
-#### 1. run the lateast `main*.m`, for example
+#### 1. run the lateast main*.m, for example
 ```
 run main9.m
 ```
