@@ -1,37 +1,63 @@
-## Welcome to GitHub Pages
+# ClassifierVOC_for_ClassifulNet
+This MATLAB program can devide sample images into servel classes according `groundtruth` message in XML file
 
-You can use the [editor on GitHub](https://github.com/OldGentleman/ClassifierVOC_for_ClassifulNet/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+---
+## START
+#### 1. run the lateast main*.m, for example
+```
+run main9.m
+```
+- Then the result images will be ploted in `output1` file which will be named as ：
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+```
+classes - subclasses - amounts of images.jpg 
+```
+- And the result txt will be saved in `output4` file which will be named as :
 
-### Markdown
+```
+classes - subclasses.txt
+```
+- This txt can be edited according to the result images and the code can read these to cover the old result.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+---
+#### 2. run the printresult.m
+- Then the bounding box can be genarated according to the lateast classes result, which will be drawn in `output2` file and named as :
 
-```markdown
-Syntax highlighted code block
+```
+new classes - 12.jpg
+```
+- `annotation_bbx.txt` and `classifier.txt` will also be genarated.
+  - `annotatioin_bbx.txt` :
+    ```
+    class_index(start with 1) tag_index(start with 1) xmin ymin xmax ymax
+    ```
+  - `annotatioin_bbx.txt` :
+    ```
+    imagename class_index change_index
+    
+    ```
+    `change_index` above is the method to deal with the images:
+    
+        change_index | deal_method
+        ---|---
+        1 | Original
+        2 | Flip Horizontal
+        3 | Flip vertical
+        4 | Flip Diagonal
+---
+#### 3. The bounding box can be optimizer again with lateast `again_optimizer*.m`
 
-# Header 1
-## Header 2
-### Header 3
+```
+run again_optimizer2.m
+```
+- The new class result can be genarated in `output3` file and named as ：
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+again-new class.jpg
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/OldGentleman/ClassifierVOC_for_ClassifulNet/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
