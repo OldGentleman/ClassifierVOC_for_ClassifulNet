@@ -3,7 +3,7 @@ This MATLAB program can devide sample images into servel classes according `grou
 
 ---
 ## START
-#### 1. run the lateast main*.m, for example
+#### 1. run the lateast `main*.m`, for example
 ```
 run main9.m
 ```
