@@ -1,6 +1,6 @@
 % function printresult_fun(classifier_finaldealnumre)
-classifier_finaldealnumre = {again_classifier_final};
-classifier_bbx = again_classifier_final
+load('output1/final_classifeir_finaldealnum.mat');
+classifier_finaldealnumre = {final_classifier_finaldealnum};
 VOCopts = VOCinit();
 filename = strcat('../VOCdevkit/',VOCopts.dataset,'/labels/');
 dirname = dir(filename);
@@ -10,7 +10,7 @@ WIDTH = 6600;
 HEIGHT = 4400;
 
 load('output1/JPEGfile.mat');
-
+load('output1/classifier_bbx2.mat');
 classifier_bbx1 = classifier_bbx;
 classifier_bbx2 = classifier_bbx;
 classifier_bbx3 = classifier_bbx;
@@ -21,28 +21,13 @@ for class = 1:length(classifier_bbx) % 生成左右、上下变换后的矩形框
     classifier_bbx4{class}(:,[3:6]) = [WIDTH-classifier_bbx{class}(:,5),HEIGHT-classifier_bbx{class}(:,6),WIDTH-classifier_bbx{class}(:,3),HEIGHT-classifier_bbx{class}(:,4)];
 end
 
-load('output1/numlist2.mat');
-numsum = length(numlist);
+numsum = length(final_classifier_finaldealnum);
 % 
 deletname = ['025807103_K1213111_97_3_26.txt'];
-%%
-% 读取txt，填充进classifier_finaldealnumre
-dirname = dir('output4/');
-dirname = dirname(3:end);
-gtidstxt = {dirname.name};
-classifier_finaldealnumre3=cell(length(classifier_finaldealnumre),1);
-for ind=1:length(gtidstxt)
-    index = find(gtidstxt{ind}=='-');
-    i=str2num(gtidstxt{ind}(1:index-1));
-    j=str2num(gtidstxt{ind}(index+1:end-4));
-    [temp1, temp2] = textread(strcat('output4/',gtidstxt{ind}),'%d%d');
-    temp1 = double(temp1);
-    temp2 = double(temp2);
-    classifier_finaldealnumre3{i,1}{j,1}=[temp1';temp2'];
-end
+
 %%
 % 记录图片名-类别-变换方式到classifier.txt
-fp = fopen('classifier.txt','w+');
+fp = fopen('classifier_again.txt','w+');
 classnum=1;
 for i=1:length(classifier_finaldealnumre)
     for j=1:length(classifier_finaldealnumre{i})
@@ -56,7 +41,7 @@ for i=1:length(classifier_finaldealnumre)
         classnum=classnum + 1;
     end
 end
-fclose(fp)
+fclose(fp);
 
 %%
 % 根据分类 分别保存12类矩形框 
@@ -94,7 +79,7 @@ for i=1:length(classifier_finaldealnumre)
         classnum=classnum + 1;
     end
 end
-save('output1/roiscell.mat','roiscell')
+save('output3/roiscell_again.mat','roiscell')
 
 % for i=1:length(roiscell)
 %     for class=1:length(roiscell{i})
@@ -127,7 +112,7 @@ for i=1:length(roiscell)
         lenroiscell(i,class)=length(roiscell{i}{class});
     end
 end
-save('output1/lenroiscell.mat','lenroiscell')
+save('output3/lenroiscell_again.mat','lenroiscell')
 
 lenroiscell(lenroiscell==0)=inf;
 minlen = min(lenroiscell,[],2);
@@ -139,7 +124,7 @@ for i=1:length(roiscell)
         if isempty(roiscell{i}{class})
             continue
         end
-        if length(roiscell{i}{class})==minlen(i)
+        if length(roiscell{i}{class})==minl en(i)
             minx=min(roiscell{i}{class}(:,3));
             miny=min(roiscell{i}{class}(:,4));
             maxx=max(roiscell{i}{class}(:,5));
@@ -184,10 +169,10 @@ for i=1:length(roiscell)
     end
     annotation_bbx{i}=annotation_temp;
 end
-save('output1/annotation_bbx','annotation_bbx') % 每一类的12类index， 四个坐标
+save('output3/annotation_bbx_again.mat','annotation_bbx') % 每一类的12类index， 四个坐标
 
 % print txt
-fp = fopen('annotatioin_bbx.txt','w+');
+fp = fopen('annotatioin_bbx_again.txt','w+');
 for i=1:length(annotation_bbx)
     for j=1:length(annotation_bbx{i}(:,1))
         % 自定义类别， 12类别， 四个坐标
@@ -197,7 +182,7 @@ end
 fclose(fp)
 
 %%
-% 根据生成的包围矩形框画每一类图并保存：output2/
+% 根据生成的包围矩形框画每一类图并保存：output3/
 for i=1:length(roiscell)
     flag = 1;
     picj = 1;
@@ -231,6 +216,6 @@ for i=1:length(roiscell)
     end
     hold off
     title(strcat(num2str(i),'class-',num2str(class),'subclass'))
-    saveas(h,strcat('output2/',num2str(i),'-',num2str(class),'.jpg'))
+    saveas(h,strcat('output3/',num2str(i),'-',num2str(class),'.jpg'))
     close all
 end

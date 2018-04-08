@@ -370,7 +370,7 @@ save('output1/classelse2.mat','classelse');
 save('output1/numlist2.mat','numlist');
 numsum = length(numlist)
 sumlength = checknum(classifier_finaldealnumre)
-imshowperclass3(classifier_finaldealnumre)
+% imshowperclass3(classifier_finaldealnumre)
 % 17 类，3类分类后细分类，改变IOU阈值分别细分类
 
 %%

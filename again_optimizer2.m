@@ -1,3 +1,4 @@
+%执行完printresult后，在此对包围框进行优化
 clc,clear
 close all
 load('output1/classifier_finaldealnumre2.mat');
@@ -220,6 +221,7 @@ for i=1:length(again_classifier_finaldealnum)
     end
     final_classifier_finaldealnum{i} = result_temp;
 end
+sumlength = checknum(final_classifier_finaldealnum)
 save('output1/final_classifeir_finaldealnum.mat','final_classifier_finaldealnum')
 %%
-printresult_fun({final_classifier_finaldealnum})
+% printresult_fun({final_classifier_finaldealnum})

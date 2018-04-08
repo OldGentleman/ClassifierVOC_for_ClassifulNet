@@ -1,3 +1,4 @@
+% 执行完main后得打包围框，输出txt
 clc,clear
 close all
 VOCopts = VOCinit();
