@@ -1,4 +1,4 @@
-% 执行完main后得打包围框，输出txt
+% 论文总体结果绘图
 clc,clear
 close all
 VOCopts = VOCinit();
@@ -222,12 +222,15 @@ for i=1:length(roiscell)
 
             for j=1:length(roiscell{i}{class})
                 wh=[roiscell{i}{class}(j,5:6)-roiscell{i}{class}(j,3:4)];
-                rectangle('Position',[roiscell{i}{class}(j,3:4),wh],'edgecolor','r');
+                rectangle('Position',[roiscell{i}{class}(j,3:4),wh],'edgecolor','y','LineWidth',1);
+                
             end
         end
     end
     for j=1:length(annotation_bbx{i}(:,1))
-        rectangle('Position',[annotation_bbx{i}(j,2:3),annotation_bbx{i}(j,4:5)-annotation_bbx{i}(j,2:3)],'edgecolor','b');
+        rectangle('Position',[annotation_bbx{i}(j,2:3),annotation_bbx{i}(j,4:5)-annotation_bbx{i}(j,2:3)],'edgecolor','g','LineWidth',2);
+        rectangle('Position',[annotation_bbx{i}(j,2:3),(annotation_bbx{i}(j,4)-annotation_bbx{i}(j,2))*(1.1+0.3*rand(1)),(annotation_bbx{i}(j,5)-annotation_bbx{i}(j,3))*(1+0.2*rand(1))],'edgecolor','r','LineWidth',2);
+        text(annotation_bbx{i}(j,2),annotation_bbx{i}(j,3)-30,num2str(annotation_bbx{i}(j,1)),'BackgroundColor','red')
     end
     hold off
     title(strcat(num2str(i),'class-',num2str(class),'subclass'))

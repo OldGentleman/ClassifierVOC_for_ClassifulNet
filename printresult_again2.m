@@ -230,7 +230,7 @@ end
 save('output5/annotation_bbx_again.mat','annotation_bbx') % 每一类的12类index， 四个坐标
 
 % print txt
-fp = fopen('annotatioin_bbx_again.txt','w+');
+fp = fopen('annotation_bbx_again.txt','w+');
 for i=1:length(annotation_bbx)
     for j=1:length(annotation_bbx{i}(:,1))
         % 自定义类别， 12类别， 四个坐标

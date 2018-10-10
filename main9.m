@@ -341,7 +341,7 @@ save('output1/classifier_finaldealnum2.mat','classifier_finaldealnum');
 % 
 % %%
 % 单个图片分一类归为"其他"类
-lengthmax=8;
+lengthmax=20;
 load('output1/classifier_finaldealnum2.mat');
 classifier_finaldealnumre=cell(length(classifier_finaldealnum),1);
 classelse = cell(length(classifier_finaldealnum),1);
